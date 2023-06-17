@@ -43,7 +43,7 @@
 
 	$("body").append(`
     <div id="gmSomeID">
-        <p>wot</p>
+        <p>u wot mate</p>
         etc.
     </div>
 `);
