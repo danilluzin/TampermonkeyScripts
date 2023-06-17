@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         New Userscript
+// @name         Shutterstock Useful Download
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -26,9 +26,22 @@ $("head").append(
       display: block;
       color: red;
     }
+    .mui-1jaljxv-iconButtonDarkBackground{
+      visibility:hidden;
+    }
      </style>
     `
 );
+
+function injectMainGrid(jNode) {}
+
+function injectMainImage(jNode) {
+
+}
+
+function injectSmallGrid(jNode) {
+
+}
 
 function injector(jNode) {
 	console.log("waited for :3");
@@ -61,15 +74,18 @@ function injector(jNode) {
 			//         hdlink.innerHTML =`<i class="fa-solid fa-file-arrow-down fa-xl" style="color: #ffffff;"></i>`;
 			hdlink.setAttribute('href', hdlinkUrl);
 			hdlink.setAttribute('target', "_blank");
+			hdlink.setAttribute('download', '');
 			hdlink.style = ` z-index: 1000000;
                           position: absolute;
-                          top:40pt;
-                          right:20pt;
+                          bottom:5pt;
+                          right:5pt;
 
                           padding: 8pt;
                           border-radius: 10pt;
                           font-size:12pt;
-                          background: rgba(0,0,0,0.4);`;
+                          //background: rgba(0,0,0,0.4);
+                          background: rgba(252, 52, 65,1);
+                          `;
 
 			this.appendChild(hdlink);
 		});
