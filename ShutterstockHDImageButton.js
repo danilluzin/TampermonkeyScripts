@@ -12,8 +12,11 @@
 // ==/UserScript==
 console.log("start");
 
-waitForKeyElements(".mui-b5j3lh-item-sstkGridItem-item", injector);
-waitForKeyElements(".mui-1p72qfc-item-sstkGridItem", injector);
+waitForKeyElements(".mui-b5j3lh-item-sstkGridItem-item", injectMainGrid); //maingrid
+waitForKeyElements(".mui-1p72qfc-item-sstkGridItem", injectMainGrid); //related grid
+waitForKeyElements(".mui-16bnujj-gridItemContainer", injectSmallGrid);
+waitForKeyElements(".mui-138rf2f-mainContainer", injectMainImage);
+
 
 $("head").append(`<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">`);
 $("head").append(
@@ -33,17 +36,23 @@ $("head").append(
     `
 );
 
-function injectMainGrid(jNode) {}
-
-function injectMainImage(jNode) {
-
+function injectMainGrid(jNode) {
+	injector(jNode, $(jNode).children('.mui-t7xql4-a-inherit-link').eq(0));
 }
 
 function injectSmallGrid(jNode) {
-
+	injector(jNode, $(jNode).children('.mui-toql9c-assetWrapper').eq(0).children('.mui-16jifdb-a-inherit-link').eq(0));
 }
 
-function injector(jNode) {
+function injectMainImage(jNode) {
+	console.log("injecting main")
+	var urlChild = $(jNode).closest('.mui-1t9dezy-root-blurredImageBackground-backgroundWithActions').children('img').eq(0);
+	injector(jNode, urlChild);
+	console.log("done injecting");
+}
+
+
+function injector(jNode, urlChild) {
 	console.log("waited for :3");
 	$(jNode).hover(
 		function (e) {
@@ -55,21 +64,27 @@ function injector(jNode) {
 				return;
 			}
 			console.log("injecting");
-			$(this).attr('injected', "injected");
-			$(this).addClass("injected");
-			var targetUrl = $(this).children('.mui-t7xql4-a-inherit-link').attr('href');
+
+			//TEST fix similar images case where "the child is not loaded yet => cant pass it as an object into this callback. have to generate it here"
+			urlChild = $(this).children('.mui-t7xql4-a-inherit-link').eq(0)
+
+			var targetUrl = $(urlChild).attr('href');
+			console.log("targetUrl= " + targetUrl + " from:" + $(urlChild).attr('aria-label'));
+			if (targetUrl === undefined || targetUrl === false) {
+				targetUrl = $(urlChild).attr('src');
+			}
+
 			if (targetUrl === undefined) {
+				console.log("gotout 2");
 				return;
 			}
-			//var targetUrl = "uuuurl";
-			//            targetUrl = "https://www.shutterstock.com/shutterstock/photos/1326079727/display_1500/stock-photo-ancient-stonework-in-the-night-1326079727.jpg"
-			// we get - https://www.shutterstock.com/image-photo/ancient-stonework-night-1326079727
+
 			var imageName = targetUrl.substring(targetUrl.lastIndexOf('/') + 1);
+			imageName = imageName.split('.')[0];
 			var imageID = imageName.split('-').slice(-1)[0];
 			var hdlink = document.createElement("a");
 			$(hdlink).addClass("hide");
 			var hdlinkUrl = "https://www.shutterstock.com/shutterstock/photos/" + imageID + "/display_1500/" + imageName + ".jpg";
-			//         hdlink.innerHTML = "id="+imageID+" name="+imageName;
 			hdlink.innerHTML = `<i class="fa-regular fa-file-image fa-xl" style="color: #ffffff;"></i>`;
 			//         hdlink.innerHTML =`<i class="fa-solid fa-file-arrow-down fa-xl" style="color: #ffffff;"></i>`;
 			hdlink.setAttribute('href', hdlinkUrl);
@@ -88,8 +103,16 @@ function injector(jNode) {
                           `;
 
 			this.appendChild(hdlink);
+			$(this).attr('injected', "injected");
+			$(this).addClass("injected");
+
+			console.log("returning button: " + hdlink)
 		});
 }
+
+
+
+
 
 
 function injectIntoMain() {
