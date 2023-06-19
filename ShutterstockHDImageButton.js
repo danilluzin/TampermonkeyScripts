@@ -127,6 +127,7 @@ function injector(jNode, type) {
 
 			if (type === "mainImage") {
 				style += `top:40pt;`
+				style += `right:15pt;`
 			} else {
 				style += `bottom:5pt;`
 			}
