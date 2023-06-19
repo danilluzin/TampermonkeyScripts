@@ -21,10 +21,17 @@ function log(txt) {
 
 log("start");
 
-waitForKeyElements(".mui-138rf2f-mainContainer", injectMainImage);
+//Main:
+//waitForKeyElements(".mui-138rf2f-mainContainer", injectMainImage); //old wrong but universal
+//waitForKeyElements(".mui-1xwj085-mainContainer-editedImageContainer", injectMainImage); //main 1
+//waitForKeyElements(".mui-520h9p-mainContainer-editedImageContainer", injectMainImage); //main 2
+waitForKeyElements("[class$='-mainContainer-editedImageContainer']", injectMainImage); //main new universal regex
+
 waitForKeyElements(".mui-b5j3lh-item-sstkGridItem-item", injectMainGrid); //maingrid
 waitForKeyElements(".mui-1p72qfc-item-sstkGridItem", injectMainGrid); //related/recomended grid
 waitForKeyElements(".mui-16bnujj-gridItemContainer", injectSmallGrid); //small grid under main image
+
+
 
 
 
@@ -128,7 +135,6 @@ function injector(jNode, type) {
 
 			if (type === "mainImage") {
 				style += `top:40pt;`
-				style += `right:15pt;`
 			} else {
 				style += `bottom:5pt;`
 			}
