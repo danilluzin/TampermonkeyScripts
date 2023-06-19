@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         Shutterstock Useful Download
 // @namespace    http://tampermonkey.net/
+// @homepage     https://github.com/danilluzin/TampermonkeyScripts
 // @version      0.1
 // @description  Adds an actually usefull download buttin to shutterstock
 // @author       Danil Luzin
