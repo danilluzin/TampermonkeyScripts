@@ -25,7 +25,8 @@ log("start");
 //waitForKeyElements(".mui-138rf2f-mainContainer", injectMainImage); //old wrong but universal
 //waitForKeyElements(".mui-1xwj085-mainContainer-editedImageContainer", injectMainImage); //main 1
 //waitForKeyElements(".mui-520h9p-mainContainer-editedImageContainer", injectMainImage); //main 2
-waitForKeyElements("[class$='-mainContainer-editedImageContainer']", injectMainImage); //main new universal regex
+//waitForKeyElements("[class$='-mainContainer-editedImageContainer']", injectMainImage); //main old universal regex
+waitForKeyElements("[class$='-mainContainer']", injectMainImage); //main new universal regex
 
 waitForKeyElements(".mui-b5j3lh-item-sstkGridItem-item", injectMainGrid); //maingrid
 waitForKeyElements(".mui-1p72qfc-item-sstkGridItem", injectMainGrid); //related/recomended grid
@@ -66,7 +67,9 @@ function injectSmallGrid(jNode) {
 function injectMainImage(jNode) {
 	log("injecting main")
 	//var urlChild = $(jNode).closest('.mui-1t9dezy-root-blurredImageBackground-backgroundWithActions').children('img').eq(0);
-	injector(jNode, "mainImage");
+	var targetNode = $(jNode).find("[class$='aspectRatioBox']").eq(0);
+	//	injector(jNode, "mainImage");
+	injector(targetNode, "mainImage");
 	log("done injecting");
 }
 
@@ -135,6 +138,7 @@ function injector(jNode, type) {
 
 			if (type === "mainImage") {
 				style += `top:40pt;`
+
 			} else {
 				style += `bottom:5pt;`
 			}
