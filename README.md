@@ -18,4 +18,13 @@
  
   ![](https://github.com/danilluzin/TampermonkeyScripts/blob/main/misc/Shutterstock_button_preview_2%2015%20mb.gif?raw=true)
 
+* [Getty Useful Download & Misc](/GettyimagesDownloadButton.js)
+  - adds a useful download button 
+  - stops the site from opening a new window each time
+  - removes junk Ui elements
 
+
+
+
+
+  
