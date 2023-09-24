@@ -22,9 +22,7 @@
   - adds a useful download button 
   - stops the site from opening a new window each time
   - removes junk Ui elements
-
-
-
+![](https://github.com/danilluzin/TampermonkeyScripts/blob/main/misc/GettyDownloadPreview.gif?raw=true)
 
 
   
