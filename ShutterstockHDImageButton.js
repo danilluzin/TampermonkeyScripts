@@ -35,7 +35,6 @@ waitForKeyElements(".mui-16bnujj-gridItemContainer", injectSmallGrid); //small g
 
 
 
-
 $("head").append(`<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">`);
 $("head").append(
 	`<style>
@@ -58,7 +57,14 @@ $("head").append(
     .mui-80b77o-darkBackgroundIcon-redBackgroundIcon-offsetCartActionButton{
       visibility:hidden;
     }
+    .mui-k1vuao-iconButtonDarkBackground{
+      visibility:hidden;
+    }
 
+    /* remove ai generation ad banner in search feed */
+    .mui-1o2ocyt-animated{
+      display: none;
+    }
 
      </style>
     `
