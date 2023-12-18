@@ -11,18 +11,73 @@
 // @require  https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
+// test
+
 function log(txt) {
-	var verbose = false;
+	var verbose = true;
 	if (verbose) {
 		console.log(txt);
 	}
 }
 
+log("hero:");
+var hero = $("[data-testid='hero-picture']");
+var innerSrc = $(hero).find('source');
+log($(hero));
+log($(innerSrc));
+
 log("start");
 
-waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectMainGrid); //main new universal regex
+//waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectMainGrid); //main new universal regex
 waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectRelatedGrid); //main new universal regex
 waitForKeyElements(".a58rsU9bXPi2pCXFikur", injectBigImage); //main new universal regex
+
+waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetter); //main v2 universal regex
+
+function injectGetter(jNode) {
+    log("new getter injecting");
+	var linkElement = $(jNode).find("a").eq(0);
+	var detailsUrl = $(linkElement).attr('href');
+	injectorV2(jNode, detailsUrl);
+}
+
+function injectorV2(jNode, detailsUrl){
+
+	$(jNode).hover(
+		function (e) {
+             log("new injector v2");
+			var isInjected = $(this).attr('injectedGetter');
+			if (isInjected !== undefined && isInjected === "injectedGetter") {
+				return;
+			}
+			log("injecting");
+
+            var getterButton = document.createElement("button");
+            $(getterButton).html("Get me :3");
+			$(getterButton).on( "click", function() {
+                $.get(detailsUrl, function(html) {
+                    var pictures = $(html).find("[data-testid='hero-picture']");
+                    var heroImage = $(pictures).find('source[type$="image/jpeg"]').not('[media]');
+                    var targetUrl = $(heroImage).attr("srcset");
+                    log("img:")
+                    log(targetUrl);
+
+                    $(getterButton).html("Got me :O");
+                });
+            })
+
+            var style = ` z-index: 1000000;
+                          position: absolute;
+                          right:5pt;
+                          top:5pt;`
+            getterButton.style = style;
+            this.appendChild(getterButton);
+
+            $(this).attr('injectedGetter', "injectedGetter");
+			$(this).addClass("injectedGetter");
+        });
+}
+
 
 waitForKeyElements(".l_Ijq5YofuqlByyenqi_", function (Node) {
 	$(Node).remove()
@@ -63,6 +118,10 @@ $("head").append(
 
     ._Tj7QQ4piUcSAS3V_RFb{
     max-width: calc(100% - 60pt) !important;
+    }
+
+    .nCeRtxREyjkRRC74jjNk{
+    display:none !important;
     }
      </style>
     `
@@ -151,7 +210,7 @@ function injector(jNode, ID, detailsUrl) {
             z-index: 999999;
             position: absolute;
             bottom:0pt;
-            opacity:0%;
+            opacity:20%;
             `
 			$(clickBlocker).addClass("hide");
 			clickBlocker.style = blockerStyle;
