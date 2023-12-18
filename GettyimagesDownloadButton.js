@@ -35,47 +35,80 @@ waitForKeyElements(".a58rsU9bXPi2pCXFikur", injectBigImage); //main new universa
 waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetter); //main v2 universal regex
 
 function injectGetter(jNode) {
-    log("new getter injecting");
+	log("new getter injecting");
 	var linkElement = $(jNode).find("a").eq(0);
 	var detailsUrl = $(linkElement).attr('href');
 	injectorV2(jNode, detailsUrl);
 }
 
-function injectorV2(jNode, detailsUrl){
+function injectorV2(jNode, detailsUrl) {
 
 	$(jNode).hover(
 		function (e) {
-             log("new injector v2");
+			log("new injector v2");
 			var isInjected = $(this).attr('injectedGetter');
 			if (isInjected !== undefined && isInjected === "injectedGetter") {
 				return;
 			}
 			log("injecting");
 
-            var getterButton = document.createElement("button");
-            $(getterButton).html("Get me :3");
-			$(getterButton).on( "click", function() {
-                $.get(detailsUrl, function(html) {
-                    var pictures = $(html).find("[data-testid='hero-picture']");
-                    var heroImage = $(pictures).find('source[type$="image/jpeg"]').not('[media]');
-                    var targetUrl = $(heroImage).attr("srcset");
-                    log("img:")
-                    log(targetUrl);
+			var getterButton = document.createElement("a");
+			$(getterButton).addClass("getterButton");
+			getterButton.innerHTML = `<i class="fa-regular fa-file-image fa-xl" style="color: #ffffff;"></i>`
+			$(getterButton).one("mouseenter", function () {
+				log("getting...")
+				getterButton.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin" style="color: #ffffff;"></i>`
+				$.get(detailsUrl, function (html) {
+					var pictures = $(html).find("[data-testid='hero-picture']");
+					var heroImage = $(pictures).find('source[type$="image/jpeg"]').not('[media]');
+					var targetUrl = $(heroImage).attr("srcset");
+					log(targetUrl);
+					getterButton.setAttribute('href', targetUrl);
+					$(getterButton).addClass("loaded");
+					getterButton.innerHTML = `<i class="fa-regular fa-file-image fa-xl" style="color: #ffffff;"></i>`
+				});
+			})
 
-                    $(getterButton).html("Got me :O");
-                });
-            })
+			getterButton.setAttribute('target', "_blank");
+			getterButton.setAttribute('download', '');
+			$(getterButton).addClass("hide");
+			/*
+			            var style = ` z-index: 1000000;
+			                          position: absolute;
+			                          right:5pt;
+			                          top:5pt;
 
-            var style = ` z-index: 1000000;
-                          position: absolute;
-                          right:5pt;
-                          top:5pt;`
-            getterButton.style = style;
-            this.appendChild(getterButton);
+			                          padding: 8pt;
+			                          border-radius: 10pt;
+			                          font-size:12pt;
+			                          //background: rgba(0,0,0,0.4);
+			                          background: rgba(252, 52, 65,1);`
+			            getterButton.style = style;
+			*/
+			this.appendChild(getterButton);
 
-            $(this).attr('injectedGetter', "injectedGetter");
+			$(this).attr('injectedGetter', "injectedGetter");
 			$(this).addClass("injectedGetter");
-        });
+
+
+			log("adding curtain");
+			var clickBlocker = document.createElement("a");
+
+			clickBlocker.setAttribute('href', detailsUrl);
+			var blockerStyle = `
+            width:100%;
+            height:100%;
+            background:green;
+            z-index: 999999;
+            position: absolute;
+            bottom:0pt;
+            opacity:40%;
+            `
+			//			$(clickBlocker).addClass("hide");
+			clickBlocker.style = blockerStyle;
+			this.appendChild(clickBlocker);
+
+		});
 }
 
 
@@ -91,6 +124,24 @@ $("head").append(
        display: none;
      }
 
+     .getterButton{
+        z-index: 1000000;
+        position: absolute;
+        width: 29.5pt;
+        height: 30pt;
+        text-align:center;
+        right:5pt;
+        top:5pt;
+        padding: 8pt;
+        border-radius: 10pt;
+        font-size:12pt;
+        background-color: rgba(8, 8, 8, 0.6)
+     }
+
+     .getterButton.loaded{
+        background: rgba(252, 52, 65,1);
+     }
+
     .newDownloadButton:hover{
        filter: brightness(75%);
     }
@@ -99,6 +150,12 @@ $("head").append(
       display: block;
       color: red;
     }
+
+    .injectedGetter:hover .hide {
+      display: block;
+      color: red;
+    }
+
     .mui-1jaljxv-iconButtonDarkBackground{
       visibility:hidden;
     }
@@ -148,7 +205,7 @@ function injectBigImage(jNode) {
 }
 
 
-
+//OLD
 function injector(jNode, ID, detailsUrl) {
 	log("waited for :3");
 	$(jNode).hover(
