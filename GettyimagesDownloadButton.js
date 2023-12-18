@@ -28,16 +28,22 @@ log($(innerSrc));
 
 log("start");
 
-//waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectMainGrid); //main new universal regex
+waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectMainGrid); //main new universal regex
 waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectRelatedGrid); //main new universal regex
 waitForKeyElements(".a58rsU9bXPi2pCXFikur", injectBigImage); //main new universal regex
 
-waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetter); //main v2 universal regex
+//waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetterMain); // v2 main grid
+//waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectGetterRelatedGrid); // v2 related grid
+//waitForKeyElements("[data-testid='hero-picture']", injectGetterBigImage); //v2 big image;
 
-function injectGetter(jNode) {
-	log("new getter injecting");
+function injectGetterMain(jNode) {
 	var linkElement = $(jNode).find("a").eq(0);
 	var detailsUrl = $(linkElement).attr('href');
+	injectorV2(jNode, detailsUrl);
+}
+
+function injectGetterRelatedGrid(jNode) {
+	var detailsUrl = $(jNode).attr('href');
 	injectorV2(jNode, detailsUrl);
 }
 
@@ -72,19 +78,7 @@ function injectorV2(jNode, detailsUrl) {
 			getterButton.setAttribute('target', "_blank");
 			getterButton.setAttribute('download', '');
 			$(getterButton).addClass("hide");
-			/*
-			            var style = ` z-index: 1000000;
-			                          position: absolute;
-			                          right:5pt;
-			                          top:5pt;
 
-			                          padding: 8pt;
-			                          border-radius: 10pt;
-			                          font-size:12pt;
-			                          //background: rgba(0,0,0,0.4);
-			                          background: rgba(252, 52, 65,1);`
-			            getterButton.style = style;
-			*/
 			this.appendChild(getterButton);
 
 			$(this).attr('injectedGetter', "injectedGetter");
@@ -102,13 +96,30 @@ function injectorV2(jNode, detailsUrl) {
             z-index: 999999;
             position: absolute;
             bottom:0pt;
-            opacity:40%;
+            opacity:0%;
             `
 			//			$(clickBlocker).addClass("hide");
 			clickBlocker.style = blockerStyle;
 			this.appendChild(clickBlocker);
 
 		});
+}
+
+function injectGetterBigImage(jNode) {
+	var targetUrl = $(jNode).attr('src');
+
+	var getterButton = document.createElement("a");
+	//  $(getterButton).addClass("getterButton");
+	//    $(getterButton).addClass("loaded");
+
+	getterButton.innerHTML = `<i class="fa-regular fa-file-image fa-xl" style="color: #ffffff;"></i>`;
+
+	getterButton.setAttribute('href', targetUrl);
+	getterButton.setAttribute('target', "_blank");
+	getterButton.setAttribute('download', '');
+
+	$(jNode).append(getterButton);
+
 }
 
 
@@ -127,19 +138,22 @@ $("head").append(
      .getterButton{
         z-index: 1000000;
         position: absolute;
-        width: 29.5pt;
-        height: 30pt;
+        width: 31pt;
+        height: 31pt;
         text-align:center;
         right:5pt;
+        margin 1pt;
         top:5pt;
         padding: 8pt;
         border-radius: 10pt;
+        border: 1pt solid hsla(0,0%,40%,.7);
         font-size:12pt;
-        background-color: rgba(8, 8, 8, 0.6)
+        background-color: rgba(8, 8, 8, 0.6);
      }
 
      .getterButton.loaded{
         background: rgba(252, 52, 65,1);
+        border-color: rgba(252, 52, 65,1);
      }
 
     .newDownloadButton:hover{
@@ -184,6 +198,7 @@ $("head").append(
     `
 );
 
+//OLD
 
 function injectMainGrid(jNode) {
 	var imageID = $(jNode).attr('data-asset-id');
@@ -205,7 +220,7 @@ function injectBigImage(jNode) {
 }
 
 
-//OLD
+
 function injector(jNode, ID, detailsUrl) {
 	log("waited for :3");
 	$(jNode).hover(
@@ -267,7 +282,7 @@ function injector(jNode, ID, detailsUrl) {
             z-index: 999999;
             position: absolute;
             bottom:0pt;
-            opacity:20%;
+            opacity:0%;
             `
 			$(clickBlocker).addClass("hide");
 			clickBlocker.style = blockerStyle;
