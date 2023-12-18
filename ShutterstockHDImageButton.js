@@ -35,7 +35,6 @@ waitForKeyElements(".mui-16bnujj-gridItemContainer", injectSmallGrid); //small g
 
 
 
-
 $("head").append(`<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">`);
 $("head").append(
 	`<style>
@@ -50,6 +49,23 @@ $("head").append(
     .mui-1jaljxv-iconButtonDarkBackground{
       visibility:hidden;
     }
+
+    .mui-1wqyxxg-button{
+      visibility:hidden;
+    }
+
+    .mui-80b77o-darkBackgroundIcon-redBackgroundIcon-offsetCartActionButton{
+      visibility:hidden;
+    }
+    .mui-k1vuao-iconButtonDarkBackground{
+      visibility:hidden;
+    }
+
+    /* remove ai generation ad banner in search feed */
+    .mui-1o2ocyt-animated{
+      display: none;
+    }
+
      </style>
     `
 );
@@ -67,9 +83,9 @@ function injectSmallGrid(jNode) {
 function injectMainImage(jNode) {
 	log("injecting main")
 	//var urlChild = $(jNode).closest('.mui-1t9dezy-root-blurredImageBackground-backgroundWithActions').children('img').eq(0);
-	var targetNode = $(jNode).find("[class$='aspectRatioBox']").eq(0);
-	//	injector(jNode, "mainImage");
-	injector(targetNode, "mainImage");
+    var targetNode = $(jNode).find("[class$='aspectRatioBox']").eq(0);
+//	injector(jNode, "mainImage");
+    injector(targetNode, "mainImage");
 	log("done injecting");
 }
 
@@ -127,7 +143,7 @@ function injector(jNode, type) {
 
 			var style = ` z-index: 1000000;
                           position: absolute;
-                          right:5pt;
+                          right:10pt;
 
                           padding: 8pt;
                           border-radius: 10pt;
@@ -137,10 +153,11 @@ function injector(jNode, type) {
                           `;
 
 			if (type === "mainImage") {
-				style += `top:40pt;`
+				style += `top:50pt;`
+                style += `right:10pt;`
 
 			} else {
-				style += `bottom:5pt;`
+				style += `bottom:10pt;`
 			}
 
 			hdlink.style = style;
