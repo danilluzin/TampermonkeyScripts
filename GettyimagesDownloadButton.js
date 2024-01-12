@@ -28,13 +28,13 @@ log($(innerSrc));
 
 log("start");
 
-waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectMainGrid); //main new universal regex
-waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectRelatedGrid); //main new universal regex
-waitForKeyElements(".a58rsU9bXPi2pCXFikur", injectBigImage); //main new universal regex
+//waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectMainGrid); //main new universal regex
+//waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectRelatedGrid); //main new universal regex
+//waitForKeyElements(".a58rsU9bXPi2pCXFikur", injectBigImage); //main new universal regex
 
-//waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetterMain); // v2 main grid
-//waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectGetterRelatedGrid); // v2 related grid
-//waitForKeyElements("[data-testid='hero-picture']", injectGetterBigImage); //v2 big image;
+waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetterMain); // v2 main grid
+waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectGetterRelatedGrid); // v2 related grid
+waitForKeyElements("[data-testid='hero-picture']", injectGetterBigImage); //v2 big image;
 
 function injectGetterMain(jNode) {
 	var linkElement = $(jNode).find("a").eq(0);
