@@ -93,7 +93,7 @@ function injectorV2(jNode, detailsUrl) {
             width:100%;
             height:100%;
             background:green;
-            z-index: 999999;
+            z-index: 9000;
             position: absolute;
             bottom:0pt;
             opacity:0%;
@@ -175,6 +175,10 @@ $("head").append(
     }
 
     .pCzloUkHud83IJ4WJPY0{
+     z-index: 10000000 !important;
+    }
+
+    .zzrXKgDp1QibIF96tq9A.iO0EbbdtrpK_wal5Jsgx{
      z-index: 10000000 !important;
     }
 
