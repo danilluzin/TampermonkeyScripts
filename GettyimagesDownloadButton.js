@@ -11,7 +11,7 @@
 // @require  https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
-// test
+// test 2
 
 function log(txt) {
 	var verbose = true;
