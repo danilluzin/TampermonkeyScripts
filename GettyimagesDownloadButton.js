@@ -11,7 +11,7 @@
 // @require  https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
-// test 3
+// test
 
 function log(txt) {
 	var verbose = true;
@@ -27,6 +27,21 @@ log($(hero));
 log($(innerSrc));
 
 log("start");
+
+
+function waitRemove(jNode) {
+	function removeMe(node) {
+		$(node).remove()
+	}
+	waitForKeyElements(jNode, removeMe);
+}
+
+//hero image AI buttons
+waitRemove("[data-testid='ai-remove-background-button']")
+waitRemove("[data-testid='modify-with-ai-button-no-generations']")
+
+//Side hero image price etc
+waitRemove("[data-testid='assetAcquisitionCardContainer']")
 
 //waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectMainGrid); //main new universal regex
 //waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectRelatedGrid); //main new universal regex
@@ -196,6 +211,11 @@ $("head").append(
     }
 
     .nCeRtxREyjkRRC74jjNk{
+    display:none !important;
+    }
+
+    /* hero image side price */
+    .DSIpV0yJQTDAz73AOMzD{
     display:none !important;
     }
      </style>
