@@ -223,6 +223,14 @@ $("head").append(
     .DSIpV0yJQTDAz73AOMzD{
     display:none !important;
     }
+
+    /* Ai ads in the main grid, nav button, footer*/
+    [data-testid="ai-mods-merch-tile"],
+    [data-testid="ai-mods-merch-banner"],
+    [data-testid="AIGenerator"]
+    {
+    display:none !important;
+    }
      </style>
     `
 );
