@@ -41,7 +41,18 @@ waitRemove("[data-testid='ai-remove-background-button']")
 waitRemove("[data-testid='modify-with-ai-button-no-generations']")
 
 //Side hero image price etc
-waitRemove("[data-testid='assetAcquisitionCardContainer']")
+//waitRemove("[data-testid='assetAcquisitionCardContainer']")
+waitForKeyElements("[data-testid='assetAcquisitionCardContainer']", function (Node) {
+	$(Node).parent().remove()
+});
+//nuke detail siblings (proce etc) as well so they dont load
+waitForKeyElements("[data-testid='details']", function (Node) {
+	$(Node).parent().attr("id", "detailsParent");
+	$(Node).siblings().remove()
+});
+
+
+
 
 //waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectMainGrid); //main new universal regex
 //waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectRelatedGrid); //main new universal regex
@@ -220,7 +231,7 @@ $("head").append(
     }
 
     /* hero image side price */
-    .DSIpV0yJQTDAz73AOMzD{
+    [data-testid='assetAcquisitionCardContainer']{
     display:none !important;
     }
 
@@ -231,6 +242,19 @@ $("head").append(
     {
     display:none !important;
     }
+
+
+    /*put hero image deatils at the top*/
+    [data-testid="details"]{
+     align-items: flex-start !important;
+    }
+
+	/* my custom Id for details*/
+  	#detailsParent{
+  	 min-height: 0px;
+  	}
+
+
      </style>
     `
 );
