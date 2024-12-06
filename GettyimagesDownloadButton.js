@@ -47,9 +47,14 @@ waitRemove("[data-testid='assetAcquisitionCardContainer']")
 //waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectRelatedGrid); //main new universal regex
 //waitForKeyElements(".a58rsU9bXPi2pCXFikur", injectBigImage); //main new universal regex
 
-waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetterMain); // v2 main grid
-waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectGetterRelatedGrid); // v2 related grid
+
+//waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetterMain); // v2 main grid // OUTDATED
+//waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectGetterRelatedGrid); // v2 related grid
 waitForKeyElements("[data-testid='hero-picture']", injectGetterBigImage); //v2 big image;
+
+waitForKeyElements("[data-testid='galleryMosaicAsset']", injectGetterMain); // v3 main grid // DEC 2024
+waitForKeyElements("[data-testid='mosaic-grid-asset']", injectGetterRelatedGrid); // v3 related grid // DEC 2024
+
 
 function injectGetterMain(jNode) {
 	var linkElement = $(jNode).find("a").eq(0);
