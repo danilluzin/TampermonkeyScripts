@@ -262,13 +262,14 @@ $("head").append(
   	}
 
 	/* image buttons "Similar", "save" etc not to fight with my blocker*/
-     [data-testid="asset-overlay"]>div{
-        z-index: 10000000 !important;
+   [data-testid="asset-overlay"]>div:nth-child(2){
+        z-index: 100000 !important;
      }
+
 
 	 /* modals fightitng with the image buttons*/
      [data-testid="modal-backdrop"]{
-        z-index:100000000 !important;
+        z-index:1000000 !important;
      }
 
 
