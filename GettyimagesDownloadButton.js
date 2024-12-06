@@ -36,7 +36,7 @@ function waitRemove(jNode) {
 	waitForKeyElements(jNode, removeMe);
 }
 
-//hero image AI buttons 
+//hero image AI buttons
 //now  hiding them in CSS just to make it load invisible. Should be faster as well
 //waitRemove("[data-testid='ai-remove-background-button']")
 //waitRemove("[data-testid='modify-with-ai-button-no-generations']")
@@ -257,8 +257,19 @@ $("head").append(
 
 	/* my custom Id for details*/
   	#detailsParent{
+     display:block !important;
   	 min-height: 0px;
   	}
+
+	/* image buttons "Similar", "save" etc not to fight with my blocker*/
+     [data-testid="asset-overlay"]>div{
+        z-index: 10000000 !important;
+     }
+
+	 /* modals fightitng with the image buttons*/
+     [data-testid="modal-backdrop"]{
+        z-index:100000000 !important;
+     }
 
 
      </style>
