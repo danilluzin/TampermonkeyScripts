@@ -36,9 +36,10 @@ function waitRemove(jNode) {
 	waitForKeyElements(jNode, removeMe);
 }
 
-//hero image AI buttons
-waitRemove("[data-testid='ai-remove-background-button']")
-waitRemove("[data-testid='modify-with-ai-button-no-generations']")
+//hero image AI buttons 
+//now  hiding them in CSS just to make it load invisible. Should be faster as well
+//waitRemove("[data-testid='ai-remove-background-button']")
+//waitRemove("[data-testid='modify-with-ai-button-no-generations']")
 
 //Side hero image price etc
 //waitRemove("[data-testid='assetAcquisitionCardContainer']")
@@ -61,7 +62,7 @@ waitForKeyElements("[data-testid='details']", function (Node) {
 
 //waitForKeyElements(".vItTTzk8rQvUIXjdVfi4", injectGetterMain); // v2 main grid // OUTDATED
 //waitForKeyElements(".pfUuJlGKhrwpbHvJvrfA", injectGetterRelatedGrid); // v2 related grid
-waitForKeyElements("[data-testid='hero-picture']", injectGetterBigImage); //v2 big image;
+waitForKeyElements("[data-testid='hero-picture']", injectGetterBigImage); //v2 big image TODO:actually do something;
 
 waitForKeyElements("[data-testid='galleryMosaicAsset']", injectGetterMain); // v3 main grid // DEC 2024
 waitForKeyElements("[data-testid='mosaic-grid-asset']", injectGetterRelatedGrid); // v3 related grid // DEC 2024
@@ -243,6 +244,11 @@ $("head").append(
     display:none !important;
     }
 
+	/* AI hero image buttons removal*/
+	[data-testid='ai-remove-background-button'],
+	[data-testid='modify-with-ai-button-no-generations']{
+	display: none!important;
+	}
 
     /*put hero image deatils at the top*/
     [data-testid="details"]{
@@ -260,7 +266,7 @@ $("head").append(
 );
 
 //OLD
-
+/*
 function injectMainGrid(jNode) {
 	var imageID = $(jNode).attr('data-asset-id');
 	var linkElement = $(jNode).find("a").eq(0);
@@ -351,3 +357,4 @@ function injector(jNode, ID, detailsUrl) {
 			this.appendChild(clickBlocker);
 		});
 }
+*/
