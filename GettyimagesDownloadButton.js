@@ -262,8 +262,18 @@ $("head").append(
   	}
 
 	/* image buttons "Similar", "save" etc not to fight with my blocker*/
-   [data-testid="asset-overlay"]>div:nth-child(2){
+   /* [data-testid="asset-overlay"]>div:nth-child(2){
         z-index: 100000 !important;
+     }
+     older solution that breaks in editorial tab where buttons are a third child*/
+
+ /* image buttons "Similar", "save" etc not to fight with my blocker*/
+   [data-testid="asset-overlay"]>div:has(button){
+        z-index: 100000 !important;
+     }
+
+     [data-testid="addToCartButton"]{
+     display:none !important;
      }
 
 
