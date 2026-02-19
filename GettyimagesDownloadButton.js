@@ -134,6 +134,12 @@ function injectorV2(jNode, detailsUrl) {
 			clickBlocker.style = blockerStyle;
 			this.appendChild(clickBlocker);
 
+
+			// add button protector
+			var buttonProtector = document.createElement("div");
+			$(buttonProtector).addClass("buttonProtector");
+			this.appendChild(buttonProtector);
+
 		});
 }
 
@@ -186,6 +192,16 @@ $("head").append(
      .getterButton.loaded{
         background: rgba(252, 52, 65,1);
         border-color: rgba(252, 52, 65,1);
+     }
+
+     .buttonProtector{
+        z-index: 100000;
+        position: absolute;
+        width: 35pt;
+        height: 35pt;
+        right:3pt;
+        top:3pt;
+        background-color: rgba(100, 255, 40, 0);
      }
 
     .newDownloadButton:hover{
