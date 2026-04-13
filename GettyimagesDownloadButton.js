@@ -298,6 +298,11 @@ $("head").append(
         z-index:1000000 !important;
      }
 
+	/* sticky search that apears after scroll is fighting with my buttons*/
+     [data-testid="sticky-search-bar"]{
+          z-index:1000000 !important;
+     }
+
 
      </style>
     `
