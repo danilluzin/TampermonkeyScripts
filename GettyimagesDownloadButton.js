@@ -21,8 +21,11 @@ function log(txt) {
 }
 
 log("hero:");
-var hero = $("[data-testid='hero-picture']");
+var hero = $("[data-testid='hero-image']");
 var innerSrc = $(hero).find('source');
+var myHeroImage = $('source[type$="image/jpeg"]').not('[media]');
+var myTargetUrl = $(myHeroImage).attr("srcset");
+
 log($(hero));
 log($(innerSrc));
 
@@ -93,11 +96,15 @@ function injectorV2(jNode, detailsUrl) {
 			var getterButton = document.createElement("a");
 			$(getterButton).addClass("getterButton");
 			getterButton.innerHTML = `<i class="fa-regular fa-file-image fa-xl" style="color: #ffffff;"></i>`
+
+
+
 			$(getterButton).one("mouseenter", function () {
+
 				log("getting...")
 				getterButton.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin" style="color: #ffffff;"></i>`
 				$.get(detailsUrl, function (html) {
-					var pictures = $(html).find("[data-testid='hero-picture']");
+					var pictures = $(html).find("[data-testid='hero-image']");
 					var heroImage = $(pictures).find('source[type$="image/jpeg"]').not('[media]');
 					var targetUrl = $(heroImage).attr("srcset");
 					log(targetUrl);
@@ -298,7 +305,7 @@ $("head").append(
         z-index:1000000 !important;
      }
 
-	/* sticky search that apears after scroll is fighting with my buttons*/
+     /* sticky search that apears after scroll is fighting with my buttons*/
      [data-testid="sticky-search-bar"]{
           z-index:10000000 !important;
      }
